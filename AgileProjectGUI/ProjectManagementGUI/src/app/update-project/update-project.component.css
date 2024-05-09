@@ -1,0 +1,17 @@
+table,tr,td,th{
+    margin-left:auto;
+    margin-right:auto;
+    background-color:#ffffff;
+    width:45%;
+    border-style:ridge;
+    text-align:center;
+    padding: 1px;;
+}
+
+h3,h4{
+    text-align:center;
+}
+
+h3{
+    color:red;
+}

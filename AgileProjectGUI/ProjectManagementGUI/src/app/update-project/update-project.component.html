@@ -1,0 +1,55 @@
+<!-- <h3>List of Projects</h3> -->
+<h3>Update an Existing Project</h3>
+<table class="table table-bordered">
+<thead>
+  <tr>
+    <th scope="col">Project_Code</th>
+    <th scope="col">Project_Title</th>
+    <th scope="col">Budget</th>
+    <th scope="col">Start_Date</th>
+    <th scope="col">Expected_End_Date</th>
+    <th scope="col">Created_On</th>
+    <th scope="col">Status</th>
+    <th scope="col">Last_Updated_On</th>
+    <th scope="col">Client_Id</th>
+    <th scope="col">Update</th>
+  </tr>
+</thead>
+  
+<tbody>
+  <tr *ngFor="let project of projects">
+    <td>{{project.projectCode}}</td>
+    <td>{{project.title}}</td>
+    <td>{{project.budget}}</td>
+    <td>{{project.startDate}}</td>
+    <td>{{project.expectedEndDate}}</td>
+    <td>{{project.createdOn}}</td>
+    <td>
+        <div *ngIf="project.status!=='Completed' && project.status!=='Cancelled'">
+            <select id="status" required [(ngModel)]="project.status" name="status">
+                <option value="New">New</option>
+                <option value="InProgress">InProgress</option>
+                <option value="Delayed">Delayed</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
+            </select>
+          </div>
+        <div *ngIf="project.status==='Completed' || project.status==='Cancelled'">
+            {{project.status}}
+        </div>
+    </td> 
+    
+    <td>{{project.lastUpdatedOn}}</td>
+    <td>{{project.clientId}}</td>
+    <td>
+      <button class="btn btn-success" *ngIf="project.status!=='Completed' && project.status!=='Cancelled'" (click)="updateStatus(project.projectCode,project)">Update</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<div [hidden]="!submitted">
+    <h4>Project updated successfully!</h4>
+</div>
+
+
