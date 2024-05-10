@@ -1,0 +1,121 @@
+<h3>Add a New Project</h3>
+<div [hidden]="submitted" style="width: 400px;">
+    <form #myForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="projectCode">Project_Code:</label>
+            <input type="number" class="form-control" id="projectCode" name="projectCode" [(ngModel)]="project.projectCode" required #projectCode="ngModel" min="0">
+            <div *ngIf="projectCode.touched && projectCode.errors?.['required']">
+                <p style="color: red;">Project_Code cannot be blank</p>
+            </div>
+            <div *ngIf="projectCode.touched && projectCode.errors?.['min']">
+                <p style="color: red;">Project_Code cannot be negative</p>
+            </div>
+        </div>
+        
+        <br>
+        
+        <div class="form-group">
+            <label for="title">Project_Title:</label>
+            <input type="text" class="form-control" id="title" name="title" [(ngModel)]="project.title" required #title="ngModel" minlength="3" pattern="[a-zA-Z_ -]+">
+            <div *ngIf="title.touched && title.errors?.['required']">
+                <p style="color: red;">Title cannot be blank</p>
+            </div>
+            <div *ngIf="title.touched && title.errors?.['minlength']">
+                <p style="color: red;">Title must be atleast 3 characters long</p>
+            </div>
+            <div *ngIf="title.touched && title.errors?.['pattern']">
+                <p style="color: red;">Title should be alphabet</p>
+            </div>
+        </div>
+        
+        <br>
+        
+        <div class="form-group">
+          <label for="budget">Budget:</label>
+          <input type="number" class="form-control" id="budget" name="budget" [(ngModel)]="project.budget" required #budget="ngModel" min="0">
+          <div *ngIf="budget.touched && budget.errors?.['required']">
+            <p style="color: red;">Budget cannot be blank</p>
+          </div>
+          <div *ngIf="budget.touched && budget.errors?.['min']">
+            <p style="color: red;">Budget cannot be negative</p>
+          </div>
+        </div>
+        
+        <br>
+        
+        <div class="form-group">
+            <label for="startDate">Start_Date:</label>
+            <input type="date" class="form-control" id="startDate" name="startDate" [(ngModel)]="project.startDate" required #startDate="ngModel">
+            <div *ngIf="startDate.touched && startDate.errors?.['required']">
+                <p style="color: red;">Start_Date cannot be blank</p>
+            </div>
+        </div>
+        
+        <br>
+        
+        <div class="form-group">
+            <label for="expectedEndDate">Expected_End_Date:</label>
+            <input type="date" class="form-control" id="expectedEndDate" name="expectedEndDate" [(ngModel)]="project.expectedEndDate" required #expectedEndDate="ngModel">
+            <div *ngIf="expectedEndDate.touched && expectedEndDate.errors?.['required']">
+                <p style="color: red;">Expected_End_Date cannot be blank</p>
+            </div>
+            <div *ngIf= "expectedEndDate.touched && project.startDate && project.expectedEndDate && (project.expectedEndDate<=project.startDate)">
+            <!-- && (new Date(project.expectedEndDate))<=(new Date(project.startDate))> -->
+                <p style="color: red;">Expected_End_Date must be greater than Start_Date</p>
+            </div>
+        </div>
+        
+        <br>
+        
+        <div class="form-group">
+            <label for="createdOn">Created_On:</label>
+            <input type="date" class="form-control" id="createdOn" name="createdOn" [(ngModel)]="project.createdOn" required #createdOn="ngModel">
+            <div *ngIf="createdOn.touched && createdOn.errors?.['required']">
+                <p style="color: red;">Created_On cannot be blank</p>
+            </div>
+        </div>
+        
+        <br>
+        
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <input type="text" class="form-control" id="status" name="status" [(ngModel)]="project.status" required #status="ngModel" pattern="^(New|InProgress|Completed|Delayed|Cancelled)$">
+            <div *ngIf="status.touched && status.errors?.['required']">
+                <p style="color: red;">Status cannot be blank</p>
+            </div>
+            <div *ngIf="status.touched && status.errors?.['pattern']">
+                <p style="color: red;">Status should be in New,InProgress,Completed,Delayed,Cancelled</p>
+            </div>
+        </div>
+        
+        <br>
+        
+        <div class="form-group">
+            <label for="lastUpdatedOn">Last_Updated_On:</label>
+            <input type="date" class="form-control" id="lastUpdatedOn" name="lastUpdatedOn" [(ngModel)]="project.lastUpdatedOn" required #lastUpdatedOn="ngModel">
+            <div *ngIf="lastUpdatedOn.touched && lastUpdatedOn.errors?.['required']">
+                <p style="color: red;">Last_Updated_On cannot be blank</p>
+            </div>
+        </div>
+        
+        <br>
+        
+        <div class="form-group">
+            <label for="client">Client:</label>
+            <select class="form-control" id="client" name="client" [(ngModel)]="project.clientId" required #client="ngModel">
+                <option *ngFor="let client of clients" [value]="client.id">{{client.name}}</option>
+            </select>
+            <div *ngIf="client.touched && client.errors?.['required']">
+                <p style="color: red;">Client cannot be blank</p>
+            </div>
+        </div> 
+
+        <br>
+        
+        <button type="submit" class="btn btn-success" [disabled]="!myForm.valid">Submit</button>
+    </form>
+</div>
+
+<div [hidden]="!submitted">
+    <h4>Project added successfully!</h4>
+</div>

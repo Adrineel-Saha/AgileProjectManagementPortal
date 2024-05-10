@@ -1,0 +1,30 @@
+<h3>List of Projects</h3>
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <th scope="col">Project_Code</th>
+    <th scope="col">Project_Title</th>
+    <th scope="col">Budget</th>
+    <th scope="col">Start_Date</th>
+    <th scope="col">Expected_End_Date</th>
+    <th scope="col">Created_On</th>
+    <th scope="col">Status</th>
+    <th scope="col">Last_Updated_On</th>
+    <th scope="col">Client_Id</th>
+  </tr>
+</thead>
+  <tbody>
+  <tr *ngFor="let project of projects">
+    <td>{{project.projectCode}}</td>
+    <td>{{project.title}}</td>
+    <td>{{project.budget}}</td>
+    <td>{{project.startDate}}</td>
+    <td>{{project.expectedEndDate}}</td>
+    <td>{{project.createdOn}}</td>
+    <td>{{project.status}}</td>
+    <td>{{project.lastUpdatedOn}}</td>
+    <td>{{project.clientId}}</td>
+  </tr>
+  </tbody>
+</table>
+

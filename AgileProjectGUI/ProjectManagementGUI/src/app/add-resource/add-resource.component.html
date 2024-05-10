@@ -1,0 +1,136 @@
+<h3>Add a New Resource</h3>
+<div [hidden]="submitted" style="width: 400px;">
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+        <!-- <div class="form-group">
+            <label for="userId">User_Id:</label>
+            <input type="text" class="form-control" id="userId" name="userId" [(ngModel)]="resource.userId" #userId="ngModel" minlength="6" maxlength="6">
+            <div *ngIf="projectCode.errors?.['required']">
+                <p style="color: red;">User_Id cannot be blank</p>
+            </div>
+            <div *ngIf="userId.errors?.['minlength'] || userId.errors?.['maxlength']">
+                <p style="color: red;">User_Id must be exactly 6 characters long</p>
+            </div>
+
+        </div>
+        
+        <br> -->
+        
+        <div class="form-group">
+            <label for="firstName">First_Name:</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="resource.firstName" required #firstName="ngModel" minlength="3" pattern="[a-zA-Z]+">
+            <div *ngIf="firstName.touched && firstName.errors?.['required']">
+                <p style="color: red;">First_Name cannot be blank</p>
+            </div>
+            <div *ngIf="firstName.touched && firstName.errors?.['minlength']">
+                <p style="color: red;">First_Name must be atleast 3 characters long</p>
+            </div>
+            <div *ngIf="firstName.touched && firstName.errors?.['pattern']">
+                <p style="color: red;">First_Name should be alphabet</p>
+            </div>
+        </div>
+        
+        <br>
+        
+        <div class="form-group">
+            <label for="lastName">Last_Name:</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="resource.lastName" required #lastName="ngModel" minlength="3" pattern="[a-zA-Z]+">
+            <div *ngIf="lastName.touched && lastName.errors?.['required']">
+                <p style="color: red;">Last_Name cannot be blank</p>
+            </div>
+            <div *ngIf="lastName.touched && lastName.errors?.['minlength']">
+                <p style="color: red;">Last_Name must be atleast 3 characters long</p>
+            </div>
+            <div *ngIf="lastName.touched && lastName.errors?.['pattern']">
+                <p style="color: red;">Last_Name should be alphabet</p>
+            </div>
+        </div>
+        
+        <br>
+        
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" class="form-control" id="email" name="email" [(ngModel)]="resource.email" required #email="ngModel" pattern=".*cognizant\.com">
+            <div *ngIf="email.touched && email.errors?.['required']">
+                <p style="color: red;">Email cannot be blank</p>
+            </div>
+            <div *ngIf= "email.touched && email.errors?.['pattern']">
+                <p style="color: red;">Email address should always have @cognizant.com</p>
+            </div>
+        </div>
+        
+        <br>
+        
+        <div class="form-group">
+            <label for="phoneNumber">Phone_Number:</label>
+            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" [(ngModel)]="resource.phoneNumber" required #phoneNumber="ngModel" minlength="10" maxlength="10">
+            <div *ngIf="phoneNumber.touched && phoneNumber.errors?.['required']">
+                <p style="color: red;">Phone_Number cannot be blank</p>
+            </div>
+            <div *ngIf="phoneNumber.touched && phoneNumber.errors?.['minlength'] || phoneNumber.errors?.['maxlength']">
+                <p style="color: red;">Phone_Number must be exactly 10 characters long</p>
+            </div>
+        </div>
+         
+        <br>
+        
+        <div class="form-group">
+            <p>Role:</p>
+            <input type="radio" class="form-check-input" id="developer" required [(ngModel)]="resource.role" name="developer" value="Developer">Developer
+            <!-- <label class="form-check-label" for="developer">
+                Developer
+            </label> -->
+            
+            <input style="margin-left:4px" type="radio" class="form-check-input" id="tester" required [(ngModel)]="resource.role" name="tester" value="Tester">Tester
+            <!-- <label class="form-check-label" for="tester">
+                Tester
+            </label> -->
+        </div>
+        
+        <br>
+        
+        <div class="form-group">
+            <label for="project">Project:</label>
+            <select class="form-control" id="project" name="project" [(ngModel)]="resource.projectCode" required #project="ngModel">
+                <option *ngFor="let proj of projects" [value]="proj.projectCode">{{proj.title}}</option>
+                
+            </select>
+            <div *ngIf="project.touched && project.errors?.['required']">
+                <p style="color: red;">Project cannot be blank</p>
+            </div>
+            <!-- <div *ngIf="project.status==='Cancelled'">
+                <p style="color: red;">Cannot add resource to a cancelled project</p>
+            </div> -->
+        </div>  
+
+        <!-- <div class="form-group">
+            <label for="project">Project:</label>
+            <select class="form-control" id="project" name="project" [(ngModel)]="resource.projectDTO.projectCode" required #project="ngModel">
+                <option *ngFor="let proj of projects" [value]="proj.projectCode">{{proj.title}}</option>
+                
+            </select>
+            <div *ngIf="project.errors?.['required']">
+                <p style="color: red;">Project cannot be blank</p>
+            </div>
+            <div *ngIf="project.status==='Cancelled'">
+                <p style="color: red;">Cannot add resource to a cancelled project</p>
+            </div>
+        </div> -->
+
+        <br>
+        
+        <button type="submit" class="btn btn-success" [disabled]="!registerForm.valid">Submit</button>
+    </form>
+</div>
+
+<div [hidden]="!submitted">
+    <!-- <div *ngIf="resourceUserId!==undefined"> -->
+        <h4>Resource added successfully!</h4>
+        <p>Newly Generated User Id : {{resourceUserId}}</p>
+    <!-- </div> -->
+    <!-- <div *ngIf="resourceUserId===undefined">
+        <h4>Resource added successfully!</h4>
+        <p>Newly Generated User Id : {{resourceUserId}}</p>
+        <h4>Cannot add resource to a cancelled project!</h4>
+    </div>  -->
+</div>
+
